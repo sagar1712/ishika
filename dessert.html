@@ -47,8 +47,17 @@
         >
       </div>
     </div>
-    <button class="button" onclick="location.href='activities.html'">
-      Continue UwU
-    </button>
+    <button class="button" id="dessertContinue">Continue UwU</button>
+    <script>
+      (function () {
+        var data = JSON.parse(localStorage.getItem('valentineSelections') || '{}');
+        document.getElementById('dessertContinue').onclick = function () {
+          var checked = document.querySelectorAll('input[name="dessert"]:checked');
+          data.dessert = Array.from(checked).map(function (el) { return el.value; });
+          localStorage.setItem('valentineSelections', JSON.stringify(data));
+          location.href = 'activities.html';
+        };
+      })();
+    </script>
   </body>
 </html>

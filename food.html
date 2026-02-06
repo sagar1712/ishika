@@ -57,8 +57,17 @@
         <label><input type="checkbox" name="food" value="sushi" /> sushi</label>
       </div>
     </div>
-    <button class="button" onclick="location.href='dessert.html'">
-      Continue Hihihhh... 
-    </button>
+    <button class="button" id="foodContinue">Continue Hihihhh...</button>
+    <script>
+      (function () {
+        var data = JSON.parse(localStorage.getItem('valentineSelections') || '{}');
+        document.getElementById('foodContinue').onclick = function () {
+          var checked = document.querySelectorAll('input[name="food"]:checked');
+          data.food = Array.from(checked).map(function (el) { return el.value; });
+          localStorage.setItem('valentineSelections', JSON.stringify(data));
+          location.href = 'dessert.html';
+        };
+      })();
+    </script>
   </body>
 </html>

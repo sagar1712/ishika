@@ -40,8 +40,17 @@
         >
       </div>
     </div>
-    <button class="button" onclick="location.href='lastpage.html'">
-      Last page ... 
-    </button>
+    <button class="button" id="activitiesContinue">Last page ...</button>
+    <script>
+      (function () {
+        var data = JSON.parse(localStorage.getItem('valentineSelections') || '{}');
+        document.getElementById('activitiesContinue').onclick = function () {
+          var checked = document.querySelectorAll('input[name="activities"]:checked');
+          data.activities = Array.from(checked).map(function (el) { return el.value; });
+          localStorage.setItem('valentineSelections', JSON.stringify(data));
+          location.href = 'lastpage.html';
+        };
+      })();
+    </script>
   </body>
 </html>

@@ -58,5 +58,28 @@
       </div>
       <div class="flower__glass"></div>
     </div>
+    <script>
+      (function () {
+        // Replace YOUR_FORMSPREE_FORM_ID with your form ID from https://formspree.io (e.g. abcdefgh)
+        var formspreeUrl = 'https://formspree.io/f/xreagbyp';
+        var raw = localStorage.getItem('valentineSelections');
+        if (!raw) return;
+        var data = JSON.parse(raw);
+        var body = {
+          date: data.date || '(not set)',
+          food: (data.food && data.food.length) ? data.food.join(', ') : '(none)',
+          dessert: (data.dessert && data.dessert.length) ? data.dessert.join(', ') : '(none)',
+          activities: (data.activities && data.activities.length) ? data.activities.join(', ') : '(none)',
+          _subject: 'ishika – Valentine selections'
+        };
+        if (formspreeUrl.indexOf('YOUR_FORMSPREE_FORM_ID') === -1) {
+          fetch(formspreeUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+          }).catch(function () {});
+        }
+      })();
+    </script>
   </body>
 </html>
